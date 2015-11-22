@@ -1,0 +1,37 @@
+---
+driver:
+  name: lxd_cli
+  config:
+    limits.memory: 4G
+    security.nesting: true
+    security.privileged: true
+  verifier_path: "/opt/verifier"
+#  image_name: "kitchen-base-ubuntu-1510"
+  publish_image_name: "kitchen-base-ubuntu-1510"
+  use_publish_image: true
+  ip_gateway: 10.0.3.1
+  lxd_proxy_install: true
+
+provisioner:
+  name: chef_zero
+  http_proxy: http://10.0.3.5:8123
+  https_proxy: https://10.0.3.5:8123
+  chef_omnibus_url: http://www.chef.io/chef/install.sh
+
+platforms:
+- name: ubuntu-15.10
+
+suites:
+#- name: base
+#  driver_config:
+#    publish_image_before_destroy: true
+#    publish_image_overwrite: true
+#    ipv4: 10.0.3.254/24
+#  run_list:
+#  - recipe[lxd_openvswitch::_base]
+- name: default
+  driver_config:
+    ipv4: 10.0.3.51/24
+  run_list:
+  - recipe[lxd_openvswitch]
+  attributes:
