@@ -1,0 +1,15 @@
+#
+# Cookbook Name:: lxd_openvswitch
+# Template:: lxc_ifdown_ovs_bug_fix.sh
+#
+###################################################### 
+# DO NOT EDIT CONTROLLED BY CHEF
+###################################################### 
+
+PORT=$5
+BRIDGE=`ovs-vsctl port-to-br $PORT`
+NET_CONFIG=/etc/network/interfaces
+# lxc should delete the port but does not yet: https://github.com/lxc/lxc/issues/590
+ovs-vsctl --if-exists del-port $BRIDGE $PORT # delete line preceding match + N; following
+#sed -i -n '/allow-'$BRIDGE' '$PORT'/{s/.*//;x;N;N;N;N;N;d;};x;p;${x;p;}' $NET_CONFIG
+#sed -i '/./,/^$/!d' $NET_CONFIG # remove leading blank lines
