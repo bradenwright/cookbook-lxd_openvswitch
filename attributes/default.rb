@@ -10,7 +10,7 @@
 default[:lxd_openvswitch][:lxd_version] = "0.20-0ubuntu4.1"
 default[:lxd_openvswitch][:enable_intervlan_routing] = true
 default[:lxd_openvswitch][:bridges] = {
-  "vbr0" => { :ipv4 => "10.1.3.10/24", :interface => "eth1"  },
+  "vbr0" => { :ipv4 => "192.168.2.10/24", :gateway => "192.168.2.1", :interface => "eth1"  },
   "vbr1" => { }
 }
 
