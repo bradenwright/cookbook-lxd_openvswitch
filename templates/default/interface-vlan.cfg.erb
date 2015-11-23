@@ -1,0 +1,11 @@
+#
+# Cookbook Name:: lxd_openvswitch
+# Template:: default
+#
+###################################################### 
+# DO NOT EDIT CONTROLLED BY CHEF
+###################################################### 
+
+auto <%= @vlan_name %>
+iface <%= @vlan_name %> inet <%= @ip_method || "static" %>
+  address <%= @ipv4 %>

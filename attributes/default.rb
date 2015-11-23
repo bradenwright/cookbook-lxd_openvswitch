@@ -9,7 +9,7 @@
 
 default[:lxd_openvswitch][:lxd_version] = "0.20-0ubuntu4.1"
 default[:lxd_openvswitch][:bridges] = {
-  "vbr0" => { :ipv4 => "10.1.3.10/24"  },
+  "vbr0" => { :ipv4 => "10.1.3.10/24", :interface => "eth1"  },
   "vbr1" => { }
 }
 
@@ -18,7 +18,13 @@ default[:lxd_openvswitch][:vlans] = {
     :id => 10,
     :ipv4 => "10.1.10.10/24",
     :parent_ovs_bridge => "vbr0"
+  },
+  "vlan11" => {
+    :id => 11,
+    :ipv4 => "10.1.11.10/24",
+    :parent_ovs_bridge => "vbr0"
   }
+
 }
 
 force_default[:apt][:compiletime] = true
